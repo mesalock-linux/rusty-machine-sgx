@@ -26,6 +26,7 @@
 //! the predictive mean and covariance. However, this is likely to change in
 //! a future release.
 
+use std::prelude::v1::*;
 use learning::toolkit::kernel::{Kernel, SquaredExp};
 use linalg::{Matrix, BaseMatrix};
 use linalg::Vector;
@@ -40,7 +41,7 @@ pub trait MeanFunc {
 }
 
 /// Constant mean function
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct ConstMean {
     a: f64,
 }
@@ -63,7 +64,7 @@ impl MeanFunc for ConstMean {
 /// Gaussian process with generic kernel and deterministic mean function.
 /// Can be used for gaussian process regression with noise.
 /// Currently does not support classification.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct GaussianProcess<T: Kernel, U: MeanFunc> {
     ker: T,
     mean: U,
@@ -161,10 +162,18 @@ impl<T: Kernel, U: MeanFunc> SupModel<Matrix<f64>, Vector<f64>> for GaussianProc
 
         let ker_mat = self.ker_mat(inputs, inputs).unwrap();
 
-        let train_mat = try!((ker_mat + noise_mat).cholesky().map_err(|_| {
+        //let train_mat = try!((ker_mat + noise_mat).cholesky().map_err(|_| {
+        //    Error::new(ErrorKind::InvalidState,
+        //               "Could not compute Cholesky decomposition.")
+        //}));
+        use rulinalg::matrix::decomposition::Cholesky;
+        use rulinalg::matrix::decomposition::Decomposition;
+        let train_mat = try!(Cholesky::decompose(ker_mat + noise_mat).map_err(|_| {
             Error::new(ErrorKind::InvalidState,
                        "Could not compute Cholesky decomposition.")
         }));
+        let train_mat = train_mat.unpack();
+
 
         let x = train_mat.solve_l_triangular(targets - self.mean.func(inputs.clone())).unwrap();
         let alpha = train_mat.transpose().solve_u_triangular(x).unwrap();

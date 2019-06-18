@@ -3,6 +3,7 @@
 //! This module provides sampling and shuffling which are used
 //! within the learning modules.
 
+use std::prelude::v1::*;
 use rand::{Rng, thread_rng};
 
 /// ```

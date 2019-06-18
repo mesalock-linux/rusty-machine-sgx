@@ -107,10 +107,27 @@
 #![deny(missing_docs)]
 #![warn(missing_debug_implementations)]
 
+#![cfg_attr(all(feature = "mesalock_sgx",
+                not(target_env = "sgx")), no_std)]
+#![cfg_attr(all(target_env = "sgx", target_vendor = "mesalock"), feature(rustc_private))]
+
+#[cfg(all(feature = "mesalock_sgx", not(target_env = "sgx")))]
+#[macro_use]
+extern crate sgx_tstd as std;
+extern crate sgx_rand as rand;
+
+#[cfg(feature = "datasets")]
 #[macro_use]
 extern crate rulinalg;
+
+#[cfg(not(feature = "datasets"))]
+extern crate rulinalg;
+
 extern crate num as libnum;
-extern crate rand;
+
+#[macro_use]
+extern crate serde_derive;
+extern crate serde;
 
 pub mod prelude;
 
@@ -168,6 +185,7 @@ pub mod learning {
 
     /// Module for optimization in machine learning setting.
     pub mod optim {
+        use std::prelude::v1::*;
 
         /// Trait for models which can be gradient-optimized.
         pub trait Optimizable {

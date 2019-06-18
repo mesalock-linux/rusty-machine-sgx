@@ -43,6 +43,7 @@
 //! trait with a concrete `CostFunc`.
 
 
+use std::prelude::v1::*;
 pub mod net_layer;
 
 use linalg::{Matrix, MatrixSlice};

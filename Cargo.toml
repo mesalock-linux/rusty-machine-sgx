@@ -10,12 +10,22 @@ keywords = ["machine","learning","stats","data","machine-learning"]
 categories = ["science"]
 readme = "README.md"
 license = "MIT"
+exclude = ["/sgx/*"]
 
 [features]
+default = ["mesalock_sgx", "fallback"]
+mesalock_sgx = ["sgx_tstd", "sgx_rand", "rulinalg/mesalock_sgx"]
 stats = []
 datasets = []
+fma = ["rulinalg/fma"]
+avx = ["rulinalg/avx"]
+sse = ["rulinalg/sse"]
+fallback = ["rulinalg/fallback"]
 
 [dependencies]
-num = { version = "0.1.41", default-features = false }
-rand = "0.4.1"
-rulinalg = { git = "https://github.com/AtheMathmo/rulinalg", rev = "1ed8b937" }
+num = { git = "https://github.com/mesalock-linux/num-sgx" }
+sgx_rand = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git", optional = true }
+sgx_tstd = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git", optional = true }
+rulinalg = { git = "https://github.com/mesalock-linux/rulinalg-sgx", default-features = false, features = ["mesalock_sgx"] }
+serde = { git = "https://github.com/mesalock-linux/serde-sgx" }
+serde_derive = { git = "https://github.com/mesalock-linux/serde-sgx" }

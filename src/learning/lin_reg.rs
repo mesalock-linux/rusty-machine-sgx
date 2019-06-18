@@ -30,6 +30,7 @@
 //! assert!(output[0] > 17f64, "Our regressor isn't very good!");
 //! ```
 
+use std::prelude::v1::*;
 use linalg::{Matrix, BaseMatrix};
 use linalg::Vector;
 use learning::{LearningResult, SupModel};
@@ -42,7 +43,7 @@ use learning::error::Error;
 /// Linear Regression Model.
 ///
 /// Contains option for optimized parameter.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LinRegressor {
     /// The parameters for the regression model.
     parameters: Option<Vector<f64>>,

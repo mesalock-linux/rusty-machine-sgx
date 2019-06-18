@@ -26,6 +26,7 @@
 //! let transformed = transformer.transform(inputs).unwrap();
 //! ```
 
+use std::prelude::v1::*;
 use learning::error::{Error, ErrorKind};
 use linalg::{Matrix, MatrixSlice, BaseMatrix, BaseMatrixMut};
 use rulinalg::norm::{MatrixNorm, Euclidean};

@@ -1,5 +1,6 @@
 //! Neural Network Layers
 
+use std::prelude::v1::*;
 use linalg::{Matrix, MatrixSlice, BaseMatrix};
 
 use learning::LearningResult;

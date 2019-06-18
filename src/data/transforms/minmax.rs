@@ -25,6 +25,7 @@
 //! let transformed = transformer.transform(inputs).unwrap();
 //! ```
 
+use std::prelude::v1::*;
 use learning::error::{Error, ErrorKind};
 use learning::LearningResult;
 use linalg::{Matrix, BaseMatrix, BaseMatrixMut, Vector};

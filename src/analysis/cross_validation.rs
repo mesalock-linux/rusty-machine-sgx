@@ -1,5 +1,6 @@
 //! Module for performing cross-validation of models.
 
+use std::prelude::v1::*;
 use std::cmp;
 use std::iter::Chain;
 use std::slice::Iter;

@@ -36,6 +36,7 @@
 //! let clustering = model.clusters().unwrap();
 //! ```
 
+use std::prelude::v1::*;
 use learning::{LearningResult, UnSupModel};
 use learning::error::{Error, ErrorKind};
 
@@ -47,7 +48,7 @@ use rulinalg::matrix::Row;
 ///
 /// Implements clustering using the DBSCAN algorithm
 /// via the `UnSupModel` trait.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DBSCAN {
     eps: f64,
     min_points: usize,

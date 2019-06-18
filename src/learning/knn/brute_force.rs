@@ -1,11 +1,12 @@
 //! Bruteforce search implementations
+use std::prelude::v1::*;
 use linalg::{Matrix, BaseMatrix};
 use learning::error::Error;
 
 use super::{KNearest, KNearestSearch, get_distances, dist};
 
 /// Perform brute-force search
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct BruteForce {
     data: Option<Matrix<f64>>,
 }

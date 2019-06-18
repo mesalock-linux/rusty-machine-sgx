@@ -26,6 +26,7 @@
 //! assert_eq!(res, Vector::new(vec![1, 0]));
 //! # }
 //! ```
+use std::prelude::v1::*;
 use std::f64;
 use std::collections::BTreeMap;
 
@@ -40,7 +41,7 @@ pub use self::binary_tree::{KDTree, BallTree};
 pub use self::brute_force::BruteForce;
 
 /// k-Nearest Neighbor Classifier
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct KNNClassifier<S: KNearestSearch> {
     k: usize,
 

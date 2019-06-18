@@ -1,5 +1,6 @@
 //! Module to compute the confusion matrix of a set of predictions.
 
+use std::prelude::v1::*;
 use std::hash::Hash;
 use std::collections::HashMap;
 use linalg::Matrix;

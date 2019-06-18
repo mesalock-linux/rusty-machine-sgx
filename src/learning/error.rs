@@ -19,7 +19,7 @@ pub struct Error {
 ///
 /// List intended to grow and so you should
 /// be wary of matching against explicitly.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum ErrorKind {
     /// The parameters used to define the model are not valid.
     InvalidParameters,
@@ -58,12 +58,14 @@ impl Error {
 }
 
 impl From<rulinalg::error::Error> for Error {
+    #[allow(deprecated)]
     fn from(e: rulinalg::error::Error) -> Error {
         Error::new(ErrorKind::LinearAlgebra, <rulinalg::error::Error as error::Error>::description(&e))
     }
 }
 
 impl error::Error for Error {
+    #[allow(deprecated)]
     fn description(&self) -> &str {
         self.error.description()
     }

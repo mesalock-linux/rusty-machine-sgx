@@ -33,6 +33,7 @@
 //! ```
 
 
+use std::prelude::v1::*;
 use linalg::{Matrix, BaseMatrix};
 use linalg::Vector;
 
@@ -44,7 +45,7 @@ use rand;
 use rand::Rng;
 
 /// Support Vector Machine
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct SVM<K: Kernel> {
     ker: K,
     alpha: Option<Vector<f64>>,

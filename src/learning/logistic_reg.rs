@@ -34,6 +34,7 @@
 //! by using the `new` constructor instead. This allows us to provide
 //! a `GradientDesc` object with custom parameters.
 
+use std::prelude::v1::*;
 use linalg::{Matrix, BaseMatrix};
 use linalg::Vector;
 use learning::{LearningResult, SupModel};
@@ -46,7 +47,7 @@ use learning::error::Error;
 /// Logistic Regression Model.
 ///
 /// Contains option for optimized parameter.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LogisticRegressor<A>
     where A: OptimAlgorithm<BaseLogisticRegressor>
 {
@@ -141,7 +142,7 @@ impl<A> SupModel<Matrix<f64>, Vector<f64>> for LogisticRegressor<A>
 /// The Base Logistic Regression model.
 ///
 /// This struct cannot be instantianated and is used internally only.
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct BaseLogisticRegressor {
     parameters: Option<Vector<f64>>,
 }
