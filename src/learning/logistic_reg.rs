@@ -92,7 +92,7 @@ impl<A: OptimAlgorithm<BaseLogisticRegressor>> LogisticRegressor<A> {
         self.base.parameters()
     }
 
-    // Set the parameters
+    /// Set the parameters
     pub fn set_parameters(&mut self, params: Vector<f64>) {
         self.base.parameters = Some(params);
     }
